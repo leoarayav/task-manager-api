@@ -2,6 +2,12 @@ const { check } = require('express-validator');
 
 module.exports = {
   create: [
+    check('firstname')
+      .isLength({ min: 3, max: 20 })
+      .withMessage('Firstname must be between 3 and 20 characters long'),
+    check('lastname')
+      .isLength({ min: 3, max: 20 })
+      .withMessage('Lastname must be between 3 and 20 characters long'),
     check('username')
       .isLength({ min: 3, max: 20 })
       .withMessage('Username must be between 3 and 20 characters long'),
