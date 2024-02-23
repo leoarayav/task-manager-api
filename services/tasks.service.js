@@ -12,7 +12,7 @@ module.exports = {
    * @description Find all tasks
    * @returns {Promise<Object>}
    */
-  find_all: async () => await Task.find(),
+  find_all: async () => await Task.find().populate('author assignedTo'),
 
   /**
    * @description Find task by id
@@ -66,4 +66,19 @@ module.exports = {
     await Task.find({
       author: authorId,
     }).select('-author'),
+
+  /**
+   * @description Assign a task to a user
+   * @param {string} taskId
+   * @param {string} userId
+   * @returns {Promise<Object>}
+   */
+  assign: async (taskId, userId) =>
+    await Task.findByIdAndUpdate(
+      taskId,
+      {
+        assignedTo: userId,
+      },
+      { new: true },
+    ).populate('assignedTo'),
 };
