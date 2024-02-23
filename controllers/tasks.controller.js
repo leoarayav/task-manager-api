@@ -135,7 +135,8 @@ module.exports = {
   assign: catchsync(async (req, res, next) => {
     try {
       const user = req.user;
-      const { taskId, userId } = req.body;
+      const { taskId } = req.params;
+      const { userId } = req.body;
       const task = task_service.find_by_id(taskId);
       if (!task)
         throw new GeneralError({
@@ -143,11 +144,11 @@ module.exports = {
           statusCode: 404,
           msg: 'Task was not found',
         });
-      if (!task.author.equals(user.id))
+      if (!task.author == user.id)
         throw new GeneralError({
-          type: 'forbidden',
-          statusCode: 403,
-          msg: 'You dont have permission to perform this action',
+          type: 'unauthorized',
+          statusCode: 401,
+          msg: 'You are not authorized to assign this task',
         });
       const user_existent = user_service.find_by_id(userId);
       if (!user_existent)
@@ -156,15 +157,17 @@ module.exports = {
           statusCode: 404,
           msg: 'User was not found',
         });
-      task.assignedTo.push(userId);
-      await task.save();
-      success_response({
+      const assigned_task = await task_service.assign(taskId, userId);
+      if (!assigned_task)
+        throw new GeneralError({
+          type: 'not_assigned',
+          statusCode: 400,
+          msg: 'Task not assigned',
+        });
+      return success_response({
         res,
         message: 'Task assigned successfully',
-        body: {
-          task,
-          user: user_existent,
-        },
+        body: assigned_task,
       });
     } catch (err) {
       next(err);
