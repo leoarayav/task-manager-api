@@ -4,9 +4,15 @@ module.exports = {
   /**
    * @description Create a new task
    * @param {Object} task
+   * @param {string} authorId
    * @returns {Promise<Object>}
    */
-  create: async task => (await Task.create(task)).populate('author'),
+  create: async (task, authorId) => {
+    return await Task.create({
+      ...task,
+      author: authorId,
+    });
+  },
 
   /**
    * @description Find all tasks
