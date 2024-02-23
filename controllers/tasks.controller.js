@@ -170,4 +170,22 @@ module.exports = {
       next(err);
     }
   }),
+  find_by_author: catchsync(async (req, res, next) => {
+    try {
+      const tasks = await task_service.find_by_author(req.user.id);
+      if (!tasks || tasks.length === 0)
+        throw new GeneralError({
+          type: 'not_found',
+          statusCode: 404,
+          msg: 'Tasks not found',
+        });
+      success_response({
+        res,
+        message: 'Your tasks fetched successfully',
+        body: tasks,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }),
 };
