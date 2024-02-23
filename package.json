@@ -1,15 +1,26 @@
 {
-  "name": "test-backend",
+  "name": "task-manager-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A multifunctional task manager application backend side",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --env-file=.env app.js"
+    "dev": "nodemon --env-file=.env app.js",
+    "start": "node app.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "task",
+    "manager",
+    "api",
+    "backend",
+    "users",
+    "management",
+    "authentication",
+    "control",
+    "pos"
+  ],
+  "author": "Leo Araya (leoarayav)",
   "private": true,
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "compression": "^1.7.4",
