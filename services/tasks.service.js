@@ -65,5 +65,5 @@ module.exports = {
   find_by_author: async authorId =>
     await Task.find({
       author: authorId,
-    }),
+    }).select('-author'),
 };
