@@ -14,7 +14,6 @@ module.exports = {
     check('priority')
       .isIn(['low', 'medium', 'high'])
       .withMessage('Priority must be low, medium or high'),
-    check('author').isMongoId().withMessage('Author must be a valid user id'),
   ],
   delete: [check('id').isMongoId().withMessage('Task id must be a valid id')],
   update: [
