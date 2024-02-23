@@ -11,8 +11,8 @@ const ownership = require('../middlewares/ownership');
 const admin = require('../middlewares/admin');
 
 // setting up the routes
-// TODO: complete the routes based on the controller and logic
 router.get('/', authenticate, task_controller.find_all);
+router.get('/created', authenticate, task_controller.find_by_author);
 router.post(
   '/',
   authenticate,
