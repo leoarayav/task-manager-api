@@ -37,8 +37,7 @@ module.exports = {
    */
   create: catchsync(async (req, res, next) => {
     try {
-      const user = req.user;
-      const task = await task_service.create(req.body, user.id);
+      const task = await task_service.create(req.body, req.user.id);
       if (!task)
         throw new GeneralError({
           type: 'not_created',
