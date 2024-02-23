@@ -20,6 +20,14 @@ router.post(
   task_controller.create,
 );
 router.put('/:taskId/assign-to', authenticate, task_controller.assign);
+router.patch(
+  '/:taskId',
+  authenticate,
+  ownership,
+  validation(task_checks.update),
+  task_controller.update,
+);
+router.delete('/:taskId', authenticate, ownership, task_controller.delete);
 
 // exporting the router
 module.exports = router;
