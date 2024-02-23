@@ -16,7 +16,7 @@ const taskSchema = new Schema({
     default: 'medium',
   },
   assignedTo: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
