@@ -26,6 +26,7 @@ const userSchema = new Schema({
   address: { type: String },
   role: { type: String, default: 0 }, // 0: user, 1: admin
   verified: { type: Boolean, default: false },
+  avatar: { type: String },
 });
 
 userSchema.pre('save', async function (next) {
