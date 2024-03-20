@@ -11,6 +11,11 @@ const commentSchema = new Schema({
     required: true,
     maxlength: 300,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 module.exports = model('Comment', commentSchema);
