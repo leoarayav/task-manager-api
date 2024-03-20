@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const compression = require('compression');
+const multer = require('multer');
 const config = require('./config');
 const database = require('./database');
 const rateLimiter = require('express-rate-limit');
@@ -49,6 +50,13 @@ app.use(
 
 // setting up the routes
 app.use('/api/v1', require('./routes'));
+
+// multer setup
+app.use(
+  multer({
+    dest: 'public/uploads',
+  }).single('image'),
+);
 
 // setting up the error handlers RFC 7807
 app.use(require('./handlers/error'));
