@@ -166,6 +166,8 @@ module.exports = {
         res,
         message: 'User fetched successfully',
         body: {
+          firstname: user.firstname,
+          lastname: user.lastname,
           username: user.username,
           email: user.email,
           role: user.role === 1 ? 'admin' : 'user',
