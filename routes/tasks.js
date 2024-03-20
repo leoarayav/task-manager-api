@@ -8,7 +8,6 @@ const task_checks = require('../checks/tasks');
 const validation = require('../middlewares/validation');
 const authenticate = require('../middlewares/authenticate');
 const ownership = require('../middlewares/ownership');
-const admin = require('../middlewares/admin');
 
 // setting up the routes
 router.get('/', authenticate, task_controller.find_all);
